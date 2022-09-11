@@ -49,6 +49,12 @@ fn app() -> Html {
             { "About" }
             </a>
           </div>
+
+          <div class="navbar-end">
+            <a class="navbar-item" href="http://github.com/butzist/butzist.github.io/">
+              <img src="assets/GitHub-Mark-Light-32px.png" alt="View page source"/>
+            </a>
+          </div>
         </div>
       </nav>
 
