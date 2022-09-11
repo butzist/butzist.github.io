@@ -3,6 +3,7 @@ use yew::prelude::*;
 
 pub struct Project {
     pub title: &'static str,
+    pub inactive: bool,
     pub description: &'static (dyn Fn() -> Html + Sync),
     pub language: &'static str,
     pub image: Option<&'static str>,
@@ -13,6 +14,7 @@ lazy_static! {
     pub static ref PROJECTS: Vec<Project> = vec![
         Project {
             title: "Activity Launcher",
+            inactive: false,
             description: &|| {
                 html!({
                     "Android App that launches hidden activities and creates home screen shortcuts for installed apps."
@@ -24,13 +26,17 @@ lazy_static! {
         },
         Project {
             title: "Te*ris",
-            description: &|| { html!({ "Te*ris clone written with Rust and bevy" }) },
+            inactive: false,
+            description: &|| {
+                html!({ "Cross-platform Te*ris clone written with Rust and bevy" })
+            },
             language: "Rust",
             image: Some("assets/tetris.png"),
-            link: "https://github.com/butzist/tetris",
+            link: "https://butzist.github.io/tetris",
         },
         Project {
             title: "DevOpsDemo",
+            inactive: false,
             description: &|| {
                 html!({
                     "DevOps demo project featuring Terraform, Kubernetes, Azure Pipelines, Spinnaker, and micro-service templates for several languages."
@@ -42,6 +48,7 @@ lazy_static! {
         },
         Project {
             title: "OpenGL experiments",
+            inactive: true,
             description: &|| { html!({ "Experiments with OpenGL in Rust" }) },
             language: "Rust + GLSL",
             image: Some("https://bulma.io/images/placeholders/128x128.png"),
@@ -49,6 +56,7 @@ lazy_static! {
         },
         Project {
             title: "BatterySaver",
+            inactive: true,
             description: &|| {
                 html!({
                     "Android app that saves power by toggling network interfaces periodically and based on device power state."
@@ -60,6 +68,7 @@ lazy_static! {
         },
         Project {
             title: "ProGraphMSA",
+            inactive: true,
             description: &|| {
                 html!({
                     "Graph-based Multiple Sequence Alignment for amino-acid sequences with intrinsic disorder and tandem repeats (PhD thesis)"
@@ -80,7 +89,7 @@ pub fn projects() -> Html {
       <div class="columns is-multiline is-6">
       { for PROJECTS.iter().map(|project| {
         html!(
-          <div class="column" style="min-width: 500px">
+          <div class="column is-one-third-widescreen is-half-desktop is-half-tablet">
             <div class="card is-full-height">
               <div class="card-content">
                 <div class="media">
@@ -90,7 +99,10 @@ pub fn projects() -> Html {
                     </figure>
                   </div>
                   <div class="media-content">
-                    <p class="title is-4">{ project.title }</p>
+                    <p class="title is-4">
+                      { project.title }
+                      if project.inactive { <sup><span class="tag ml-2 is-warning">{ "inactive" }</span></sup> }
+                    </p>
                     <p class="subtitle is-6">{ project.language }</p>
                     <a class="subtitle is-6" href={ project.link }>{ project.link }</a>
                   </div>

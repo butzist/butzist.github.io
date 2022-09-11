@@ -14,7 +14,7 @@ fn app() -> Html {
 
     html!(
       <>
-      <nav class="navbar" role="navigation" aria-label="main navigation">
+      <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item" href="http://butzist.github.io/">
             <img src="assets/szalkowski.png" />
@@ -52,7 +52,7 @@ fn app() -> Html {
         </div>
       </nav>
 
-      <div class="px-6">
+      <div class="px-6 pt-6">
       { (*content).clone() }
       </div>
     </>
