@@ -1,7 +1,7 @@
 use lazy_static::lazy_static;
 use yew::prelude::*;
 
-#[derive(Clone)]
+#[derive(Properties, PartialEq, Clone)]
 pub struct Language {
     title: &'static str,
     excitement: u8,
@@ -97,29 +97,38 @@ fn sorted_languages() -> Vec<&'static Language> {
 #[function_component(Languages)]
 pub fn languages() -> Html {
     html!(
-        <>
-        <h1 class="title">{ "Languages/Technologies/Skills" }</h1>
-        { for sorted_languages().iter().map(|language| {
-            html!(
-                <div class="columns is-centered is-vcentered is-6">
-                    <div class="column is-1 is-full-height">
-                        <h1 class="title is-4">{ language.title }</h1>
-                    </div>
-                    <div class="column is-4 is-flex is-align-items-center">
-                        <span class="icon is-large has-text-danger mr-1">
-                            <i class="mdi mdi-36px mdi-heart"></i>
-                        </span>
-                        <progress class="progress is-medium is-danger" value={format!("{}", language.excitement)} max="100">{ format!("{}%", language.excitement) }</progress>
-                    </div>
-                    <div class="column is-4 is-flex is-align-items-center">
-                        <span class="icon is-large has-text-success mr-1">
-                            <i class="mdi mdi-36px mdi-lightbulb-on"></i>
-                        </span>
-                        <progress class="progress is-medium is-success" value={format!("{}", language.skill)} max="100">{ format!("{}%", language.skill) }</progress>
-                    </div>
-                </div>
-            )
-        })}
-        </>
+        <div class="container">
+            <h1 class="title is-1 has-text-centered">{ "Languages/Technologies/Skills" }</h1>
+            <div class="card is-full-height has-background-primary-light">
+                <div class="card-content">
+                    { for sorted_languages().into_iter().map(|language| {
+                        html!(<LanguageComponent ..language.clone() />)
+                    })}
+                 </div>
+            </div>
+        </div>
+    )
+}
+
+#[function_component(LanguageComponent)]
+pub fn language(language: &Language) -> Html {
+    html!(
+        <div class="columns is-centered is-vcentered is-6">
+            <div class="column is-2 is-full-height">
+                <h1 class="title is-4">{ language.title }</h1>
+            </div>
+            <div class="column is-5 is-flex is-align-items-center">
+                <span class="icon is-large has-text-danger mr-1">
+                    <i class="mdi mdi-36px mdi-heart"></i>
+                </span>
+                <progress class="progress is-medium is-danger" value={format!("{}", language.excitement)} max="100">{ format!("{}%", language.excitement) }</progress>
+            </div>
+            <div class="column is-5 is-flex is-align-items-center">
+                <span class="icon is-large has-text-success mr-1">
+                    <i class="mdi mdi-36px mdi-lightbulb-on"></i>
+                </span>
+                <progress class="progress is-medium is-success" value={format!("{}", language.skill)} max="100">{ format!("{}%", language.skill) }</progress>
+            </div>
+        </div>
     )
 }

@@ -1,6 +1,7 @@
 use lazy_static::lazy_static;
 use yew::prelude::*;
 
+#[derive(Properties, Clone)]
 pub struct Project {
     pub title: &'static str,
     pub inactive: bool,
@@ -8,6 +9,16 @@ pub struct Project {
     pub language: &'static str,
     pub image: Option<&'static str>,
     pub link: &'static str,
+}
+
+impl PartialEq for Project {
+    fn eq(&self, other: &Self) -> bool {
+        self.title == other.title
+            && self.inactive == other.inactive
+            && self.language == other.language
+            && self.image == other.image
+            && self.link == other.link
+    }
 }
 
 lazy_static! {
@@ -84,38 +95,44 @@ lazy_static! {
 #[function_component(Projects)]
 pub fn projects() -> Html {
     html!(
-      <>
-      <h1 class="title">{ "Private projects" }</h1>
-      <div class="columns is-multiline is-6">
-      { for PROJECTS.iter().map(|project| {
-        html!(
-          <div class="column is-one-third-widescreen is-half-desktop is-half-tablet">
-            <div class="card is-full-height">
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-left">
-                    <figure class="image is-128x128">
-                      <img src={project.image} alt="Project image" />
-                    </figure>
-                  </div>
-                  <div class="media-content">
-                    <p class="title is-4">
-                      { project.title }
-                      if project.inactive { <sup><span class="tag ml-2 is-warning">{ "inactive" }</span></sup> }
-                    </p>
-                    <p class="subtitle is-6">{ project.language }</p>
-                    <a class="subtitle is-6" href={ project.link }>{ project.link }</a>
-                  </div>
-                </div>
-
-                <div class="content">
-                  { (project.description)() }
-                </div>
-              </div>
+        <div class="container">
+            <h1 class="title is-1 has-text-centered">{ "Private projects" }</h1>
+            <div class="columns is-multiline is-6 is-variable">
+                { for PROJECTS.iter().map(|project| {
+                    html!(<ProjectComponent ..project.clone() />)
+                })}
             </div>
-          </div>
-      )})}
-      </div>
-      </>
+        </div>
+    )
+}
+
+#[function_component(ProjectComponent)]
+pub fn project(project: &Project) -> Html {
+    html!(
+        <div class="column is-half">
+            <div class="card is-full-height has-background-primary-light has-hover-zoom">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-128x128">
+                                <img src={project.image} alt="Project image" />
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-4">
+                                { project.title }
+                                if project.inactive { <sup><span class="tag ml-2 is-warning">{ "inactive" }</span></sup> }
+                            </p>
+                            <p class="subtitle is-6">{ project.language }</p>
+                            <a class="subtitle is-6" href={ project.link }>{ project.link }</a>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        { (project.description)() }
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }

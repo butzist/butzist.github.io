@@ -1,9 +1,5 @@
 @charset "utf-8";
 
-$bg-light-blue: #e5f2ff;
-$bg-dark-blue: #6badf0;
-
-$card-background-color: $bg-light-blue;
 $card-radius: 1rem;
 
 .is-full-height {
@@ -16,10 +12,10 @@ $card-radius: 1rem;
 
 @import "bulma/bulma.sass";
 
-.card {
+.has-hover-zoom {
     transition: transform .2s;
 }
 
-.card:hover {
-    transform: scale(1.03);
+.has-hover-zoom:hover {
+    transform: scale(1.02);
 }
