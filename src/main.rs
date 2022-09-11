@@ -1,4 +1,4 @@
-use yew::{prelude::*, virtual_dom::VNode};
+use yew::prelude::*;
 
 mod about;
 use about::About;
@@ -8,8 +8,7 @@ use projects::Projects;
 #[function_component(App)]
 fn app() -> Html {
     let content = use_state(|| html!(<Projects />));
-
-    fn goto<T: Component<Properties = ()>>(content: UseStateHandle<VNode>) -> Callback<MouseEvent> {
+    fn goto<T: Component<Properties = ()>>(content: UseStateHandle<Html>) -> Callback<MouseEvent> {
         Callback::from(move |_| content.set(html!(<T />)))
     }
 
@@ -36,17 +35,13 @@ fn app() -> Html {
               </a>
 
               <div class="navbar-dropdown">
-                <a class="navbar-item">
-                  { "DevOpsDemo" }
-                </a>
-
-                <a class="navbar-item">
-                  { "ActivityLauncher" }
-                </a>
-
-                <a class="navbar-item">
-                  { "Te*ris" }
-                </a>
+                {
+                  for projects::PROJECTS.iter().map(|project| { html!(
+                    <a class="navbar-item" href={ project.link }>
+                    { project.title }
+                  </a>
+                  ) })
+                }
               </div>
             </div>
 
@@ -57,7 +52,7 @@ fn app() -> Html {
         </div>
       </nav>
 
-      <div>
+      <div class="px-6">
       { (*content).clone() }
       </div>
     </>

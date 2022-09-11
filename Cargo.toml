@@ -3,5 +3,10 @@ name = "homepage-yew"
 version = "0.1.0"
 edition = "2021"
 
+[profile.release]
+opt-level = 'z'
+lto = true
+
 [dependencies]
 yew = "0.19"
+lazy_static = "*"

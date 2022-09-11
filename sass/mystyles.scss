@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+$bg-light-blue: #e5f2ff;
+
+$card-background-color: $bg-light-blue;
+$card-radius: 1rem;
+
+.is-full-height {
+    height: 100%
+}
+
+.is-full-width {
+    width: 100%
+}
+
+@import "bulma/bulma.sass";
