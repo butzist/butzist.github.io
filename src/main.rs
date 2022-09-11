@@ -12,6 +12,12 @@ fn app() -> Html {
         Callback::from(move |_| content.set(html!(<T />)))
     }
 
+    let menu_active = use_state(|| false);
+    let toggle_menu = {
+        let menu_active = menu_active.clone();
+        Callback::from(move |_| menu_active.set(!*menu_active))
+    };
+
     html!(
       <>
       <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
@@ -20,14 +26,14 @@ fn app() -> Html {
             <img src="assets/szalkowski.png" />
           </a>
 
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+          <a role="button" class={classes!("navbar-burger", menu_active.then(|| "is-active"))} aria-label="menu" aria-expanded="false" data-target="navbar" onclick={toggle_menu.clone()}>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
 
-        <div id="navbar" class="navbar-menu">
+        <div id="navbar" class={classes!("navbar-menu", menu_active.then(|| "is-active"))}>
           <div class="navbar-start">
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link" onclick={goto::<Projects>(content.clone())}>
