@@ -1,8 +1,11 @@
 use yew::prelude::*;
 
 mod about;
-use about::About;
+mod languages;
 mod projects;
+
+use about::About;
+use languages::Languages;
 use projects::Projects;
 
 #[function_component(App)]
@@ -51,8 +54,12 @@ fn app() -> Html {
               </div>
             </div>
 
+            <a class="navbar-item" onclick={goto::<Languages>(content.clone())}>
+              { "Languages" }
+            </a>
+
             <a class="navbar-item" onclick={goto::<About>(content.clone())}>
-            { "About" }
+              { "About" }
             </a>
           </div>
 
