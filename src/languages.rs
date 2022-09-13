@@ -1,4 +1,3 @@
-use lazy_static::lazy_static;
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq, Clone)]
@@ -8,8 +7,8 @@ pub struct Language {
     skill: u8,
 }
 
-lazy_static! {
-    pub static ref LANGUAGES: Vec<&'static Language> = vec![
+thread_local! {
+    pub static LANGUAGES: Vec<&'static Language> = vec![
         &Language {
             title: "Rust",
             excitement: 95,
@@ -89,7 +88,7 @@ lazy_static! {
 }
 
 fn sorted_languages() -> Vec<&'static Language> {
-    let mut langs = LANGUAGES.clone();
+    let mut langs = LANGUAGES.with(|l| l.clone());
     langs.sort_by(|a, b| b.excitement.cmp(&a.excitement));
     langs
 }
@@ -98,13 +97,17 @@ fn sorted_languages() -> Vec<&'static Language> {
 pub fn languages() -> Html {
     html!(
         <div class="container">
-            <h1 class="title is-1 has-text-centered">{ "Languages/Technologies/Skills" }</h1>
-            <div class="card is-full-height has-background-primary-light">
-                <div class="card-content">
-                    { for sorted_languages().into_iter().map(|language| {
-                        html!(<LanguageComponent ..language.clone() />)
-                    })}
-                 </div>
+            <nav class="level">
+                { for ["Languages", "Methods", "Technologies"].into_iter().map(|item| {
+                    html!(<div class="level-item">
+                        <h1 class="title is-1">{ item }</h1>
+                    </div>)
+                })}
+            </nav>
+            <div class="box has-background-primary-light">
+                { for sorted_languages().into_iter().map(|language| {
+                    html!(<LanguageComponent ..language.clone() />)
+                })}
             </div>
         </div>
     )
@@ -117,17 +120,21 @@ pub fn language(language: &Language) -> Html {
             <div class="column is-2 is-full-height">
                 <h1 class="title is-4">{ language.title }</h1>
             </div>
-            <div class="column is-5 is-flex is-align-items-center">
-                <span class="icon is-large has-text-danger mr-1">
-                    <i class="mdi mdi-36px mdi-heart"></i>
+            <div class="column is-5">
+                <span class="level is-mobile">
+                    <span class="icon is-large has-text-danger mr-1">
+                        <i class="mdi mdi-36px mdi-heart"></i>
+                    </span>
+                    <progress class="progress is-medium is-danger" value={format!("{}", language.excitement)} max="100">{ format!("{}%", language.excitement) }</progress>
                 </span>
-                <progress class="progress is-medium is-danger" value={format!("{}", language.excitement)} max="100">{ format!("{}%", language.excitement) }</progress>
             </div>
-            <div class="column is-5 is-flex is-align-items-center">
-                <span class="icon is-large has-text-success mr-1">
-                    <i class="mdi mdi-36px mdi-lightbulb-on"></i>
+            <div class="column is-5">
+                <span class="level is-mobile">
+                    <span class="icon is-large has-text-success mr-1">
+                        <i class="mdi mdi-36px mdi-lightbulb-on"></i>
+                    </span>
+                    <progress class="progress is-medium is-success" value={format!("{}", language.skill)} max="100">{ format!("{}%", language.skill) }</progress>
                 </span>
-                <progress class="progress is-medium is-success" value={format!("{}", language.skill)} max="100">{ format!("{}%", language.skill) }</progress>
             </div>
         </div>
     )

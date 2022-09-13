@@ -9,4 +9,3 @@ lto = true
 
 [dependencies]
 yew = "0.19"
-lazy_static = "*"
