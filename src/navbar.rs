@@ -4,7 +4,7 @@ use yew::prelude::*;
 #[derive(Clone, Copy)]
 pub enum ContentPage {
     About,
-    Languages,
+    Skills,
     Projects,
 }
 
@@ -58,8 +58,8 @@ pub fn nav(props: &NavProps) -> Html {
               </div>
             </div>
 
-            <a class="navbar-item" onclick={goto(ContentPage::Languages)}>
-              { "Languages" }
+            <a class="navbar-item" onclick={goto(ContentPage::Skills)}>
+              { "Skills" }
             </a>
 
             <a class="navbar-item" onclick={goto(ContentPage::About)}>

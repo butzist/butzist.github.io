@@ -1,19 +1,19 @@
 use yew::prelude::*;
 
 mod about;
-mod languages;
 mod navbar;
 mod projects;
+mod skills;
 
 use about::About;
-use languages::Languages;
 use navbar::{ContentPage, Nav};
 use projects::Projects;
+use skills::Skills;
 
 fn page_for_nav(page: ContentPage) -> Html {
     match page {
         ContentPage::About => html!(<About />),
-        ContentPage::Languages => html!(<Languages />),
+        ContentPage::Skills => html!(<Skills />),
         ContentPage::Projects => html!(<Projects />),
     }
 }

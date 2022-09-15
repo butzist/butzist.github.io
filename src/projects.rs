@@ -95,22 +95,26 @@ pub fn projects() -> Html {
 pub fn project(project: &Project) -> Html {
     html!(
         <div class="column is-half">
-            <div class="box is-full-height has-background-primary-light has-hover-zoom">
-                <div class="media">
-                    <div class="media-left">
-                        <figure class="image is-64x64">
-                            <img src={project.image} alt="Project image" />
-                        </figure>
+            <div class="card is-full-height has-background-primary-light">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-64x64">
+                                <img src={project.image} alt="Project image" />
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-4">
+                                { project.title }
+                                if project.inactive { <sup><span class="tag ml-2 is-warning">{ "inactive" }</span></sup> }
+                            </p>
+                            <p class="subtitle is-6">{ project.language }</p>
+                            <p>{ project.description.clone() }</p>
+                        </div>
                     </div>
-                    <div class="media-content">
-                        <p class="title is-4">
-                            { project.title }
-                            if project.inactive { <sup><span class="tag ml-2 is-warning">{ "inactive" }</span></sup> }
-                        </p>
-                        <p class="subtitle is-6">{ project.language }</p>
-                        <p>{ project.description.clone() }</p>
-                        <p class="mt-4"><a class="has-text-primary" href={ project.link }>{ project.link }</a></p>
-                    </div>
+                </div>
+                <div class="card-footer">
+                <a class="card-footer-item button is-link is-outlined is-rounded is-has-text-weight-bold" href={ project.link }>{ "Website " }</a>
                 </div>
             </div>
         </div>

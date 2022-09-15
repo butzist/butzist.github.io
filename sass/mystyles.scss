@@ -1,14 +1,10 @@
 @charset "utf-8";
 
+@import "bulma/sass/utilities/initial-variables.sass";
+
+$primary: $grey;
+$link: $grey;
 $card-radius: 1rem;
-
-.is-full-height {
-    height: 100%;
-}
-
-.is-full-width {
-    width: 100%;
-}
 
 @import "bulma/bulma.sass";
 
@@ -18,4 +14,21 @@ $card-radius: 1rem;
 
 .has-hover-zoom:hover {
     transform: scale(1.02);
+}
+
+.column .card {
+    display: flex;
+    flex-direction: column;
+}
+
+.column .card-footer {
+    margin-top: auto;
+}
+
+.is-full-height {
+    height: 100%;
+}
+
+.is-full-width {
+    width: 100%;
 }

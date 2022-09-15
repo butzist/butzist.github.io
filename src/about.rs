@@ -21,14 +21,14 @@ pub fn projects() -> Html {
                     </div>
                 </div>
 
-                <div class="content">
+                <section class="content mt-5">
                     {
                         "DataHow is a ETH Spin-off that provides software for bioprocess data analysis.
                         My team is working on a modular software platform for data analysis through a web client.
                         The software is built with micro-services and micro-frontends on top of Kubernetes allowing
                         a deployment on any cloud platform or on premise."
                     }
-                </div>
+                </section>
             </div>
 
             <div class="box mt-6 has-background-primary-light">
