@@ -28,7 +28,7 @@ thread_local! {
             inactive: false,
             description:
                 html!({ "Cross-platform Te*ris clone written with Rust and bevy" }),
-            language: "Rust",
+            language: "Rust + Bevy",
             image: Some("assets/tetris.png"),
             link: "https://butzist.github.io/tetris",
         },
@@ -41,6 +41,14 @@ thread_local! {
             language: "Terraform, Go, Rust, Python, ...",
             image: Some("assets/devopsdemo.png"),
             link: "https://github.com/DevOpsDemoTF",
+        },
+        Project {
+            title: "Snake Cube Puzzle solver",
+            inactive: false,
+            description: html!({ "Solver for a physical puzzle with 3D visualization" }) ,
+            language: "Rust + Bevy",
+            image: Some("https://images.thalia.media/00/-/ffb0d0305589436b9f94af38cf73d399/philos-6011-schlangenwuerfel-mittel.jpeg"),
+            link: "https://butzist.github.io/chain-cube/",
         },
         Project {
             title: "OpenGL experiments",
