@@ -1,7 +1,7 @@
 use yew::prelude::*;
 
-#[function_component(About)]
-pub fn projects() -> Html {
+#[function_component]
+pub fn About() -> Html {
     html!(
         <div class="container">
             <div class="box has-background-primary-light">

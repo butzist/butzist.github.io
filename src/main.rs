@@ -18,8 +18,8 @@ fn page_for_nav(page: ContentPage) -> Html {
     }
 }
 
-#[function_component(App)]
-fn app() -> Html {
+#[function_component]
+fn App() -> Html {
     let content = use_state(|| ContentPage::Projects);
     let set_content = {
         let content = content.clone();
@@ -38,5 +38,5 @@ fn app() -> Html {
 }
 
 fn main() {
-    yew::start_app::<App>();
+    yew::Renderer::<App>::new().render();
 }

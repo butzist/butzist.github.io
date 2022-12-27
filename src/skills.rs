@@ -103,8 +103,8 @@ fn sorted_skills() -> Vec<&'static Skill> {
     langs
 }
 
-#[function_component(Skills)]
-pub fn skills() -> Html {
+#[function_component]
+pub fn Skills() -> Html {
     html!(
         <div class="container">
             <nav class="level">
@@ -123,8 +123,8 @@ pub fn skills() -> Html {
     )
 }
 
-#[function_component(SkillComponent)]
-pub fn skill(skill: &Skill) -> Html {
+#[function_component]
+pub fn SkillComponent(skill: &Skill) -> Html {
     html!(
         <div class="columns is-centered is-vcentered is-6">
             <div class="column is-2 is-full-height">

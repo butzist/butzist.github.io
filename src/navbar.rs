@@ -13,8 +13,8 @@ pub struct NavProps {
     pub set_content: Callback<ContentPage>,
 }
 
-#[function_component(Nav)]
-pub fn nav(props: &NavProps) -> Html {
+#[function_component]
+pub fn Nav(props: &NavProps) -> Html {
     let goto = |page: ContentPage| {
         let setter = props.set_content.clone();
         Callback::from(move |_| setter.emit(page))

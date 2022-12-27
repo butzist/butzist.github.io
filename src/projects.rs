@@ -77,8 +77,8 @@ thread_local! {
     ];
 }
 
-#[function_component(Projects)]
-pub fn projects() -> Html {
+#[function_component]
+pub fn Projects() -> Html {
     html!(
         <div class="container">
             <h1 class="title is-1 has-text-centered">{ "Private projects" }</h1>
@@ -91,8 +91,8 @@ pub fn projects() -> Html {
     )
 }
 
-#[function_component(ProjectComponent)]
-pub fn project(project: &Project) -> Html {
+#[function_component]
+pub fn ProjectComponent(project: &Project) -> Html {
     html!(
         <div class="column is-half">
             <div class="card is-full-height has-background-primary-light">
