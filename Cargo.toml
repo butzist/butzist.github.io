@@ -8,4 +8,4 @@ opt-level = 'z'
 lto = true
 
 [dependencies]
-yew = { version = "0.20.0", features = ["csr"] }
+yew = { version = "0.21.0", features = ["csr"] }
